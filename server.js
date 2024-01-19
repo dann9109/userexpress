@@ -45,6 +45,12 @@ app.post('/api/users', async (requestObj, responseObj) => {
         message: 'User added successfully!'
     })
 });
+
+if(!users.find(user => user.username === requestObj.body.username) && requestObj.body.username){
+    users.push(requestObj.body)
+
+    await saveUserData(users);
+}
 app.listen(PORT, () => {
     console.log('Server started on port', PORT);
 });
