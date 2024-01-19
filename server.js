@@ -34,11 +34,16 @@ app.post('/api/users', async (requestObj, responseObj) => {
     // Get the old users array
     const users = await getUserData();
     
-    // Push the body object from the client to our old array
-    users.push(requestObj.body);
+    // // Push the body object from the client to our old array
+    // users.push(requestObj.body);
     
     // Overwrite the old array with the newly updated array
     await saveUserData(users);
+    if(!users.find(user => user.username === requestObj.body.username) && requestObj.body.username){
+        users.push(requestObj.body)
+    
+        await saveUserData(users);
+    }
     
     // Respond back to the client
     responseObj.send({
@@ -46,11 +51,6 @@ app.post('/api/users', async (requestObj, responseObj) => {
     })
 });
 
-if(!users.find(user => user.username === requestObj.body.username) && requestObj.body.username){
-    users.push(requestObj.body)
-
-    await saveUserData(users);
-}
 app.listen(PORT, () => {
     console.log('Server started on port', PORT);
 });
