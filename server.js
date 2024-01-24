@@ -1,9 +1,24 @@
 const express = require('express');
 
+
+
 const fs = require('fs');
 const cors = require('cors');
 
 
+
+
+// db.query('SELECT * FROM users', (err, results) =>{
+//     if(err) return console.log(err);
+
+//     console.log(results);
+// })
+
+// db.query('INSERT INTO users (username, email, password) VALUES ("dan", "dan@test.com", "pass123")', (err, results)=>{
+//     if(err) return console.log(err);
+
+//     console.log(results);
+// });
 
 const PORT = 3333;
 
